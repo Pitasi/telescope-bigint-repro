@@ -1,0 +1,23 @@
+syntax = "proto3";
+package myproto;
+
+import "google/protobuf/any.proto";
+
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+
+  rpc MyMethod(MyRequest) returns (MyResponse);
+
+  rpc OtherMethod(SomeMessage) returns (MyResponse);
+}
+
+message MyRequest {
+  google.protobuf.Any msg = 1;
+  uint64 top_level_bigint = 2;
+}
+
+message MyResponse { }
+
+message SomeMessage {
+  uint64 wrapped_bigint = 1;
+}
